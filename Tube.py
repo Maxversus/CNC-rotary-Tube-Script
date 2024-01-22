@@ -1,10 +1,14 @@
 import re
 
-D = 40
+D = 40 # Pipe diameter
+file = "" # Add the name of the file you want to open. "NameFile.CNC"
+
+
+
 divisor = (D*3.1415926535)/360
 number = ["Y", "J"]
 
-with open("./Фрагмент.tap", "r+") as file:
+with open(f"{file}", "r+") as file:
     content = file.read()
 
 def replace_y_values(number, code, divisor):
@@ -20,5 +24,5 @@ for i in number:
     content = replace_y_values(i, content, divisor)
 
 print(content)
-with open("Job.txt", "w") as file:
+with open(f"{file}_mode", "w") as file:
     file.write(content)
