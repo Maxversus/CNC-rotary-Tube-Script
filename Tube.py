@@ -1,5 +1,4 @@
 import re
-from Gcodecreate import GCode
 D = 40 # Pipe diameter
 filename = "my_new_gcode.gcode" # Add the name of the file you want to open. "NameFile.CNC"
 
