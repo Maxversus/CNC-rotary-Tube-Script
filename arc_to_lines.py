@@ -26,6 +26,7 @@ for line in parsed_gcode:
                                             num_segments=20
                                             ))
         new_gcode.extend(arc_lines)
+        
     if 'X' in line.params:
         prev_x = line.params['X']
     if 'Y' in line.params:
