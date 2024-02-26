@@ -9,7 +9,7 @@ new_gcode = []
 parsed_gcode = GcodeParser(gcode, include_comments=True).lines
 for line in parsed_gcode:
     # заменить команды G2 и G3
-    if not line.command_str in ("G2", "G3"):
+    if line.command_str not in ("G2", "G3"):
         new_gcode.append(line.gcode_str)
     else:  
         if line.command == ('G', 2):
@@ -25,7 +25,7 @@ for line in parsed_gcode:
                                             clockwise,
                                             num_segments=20
                                             ))
-        
+        new_gcode.extend(arc_lines)
     if 'X' in line.params:
         prev_x = line.params['X']
     if 'Y' in line.params:
