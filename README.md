@@ -1,2 +1,5 @@
-This script works with G-code. To work, you will need to create a G-code for the unfolded pipe and use a script to convert the Y axis to degrees. Please note that the Y axis will rotate.
-THE SCRIPT HAS NOT BEEN TESTED YET!!!!!
+Данный скрипт предназначен для резки труб на ЧПУ с поворотной осью A.
+
+1.Подготовить G-код для резки трубы в развернутом виде.
+2.Пропустить G-код через arc_to_lines.py, который преобразует команды G2 и G3 в G1.
+3.Пропустить полученный G-код через Tube.py. В этом скрипте необходимо указать диаметр трубы.
