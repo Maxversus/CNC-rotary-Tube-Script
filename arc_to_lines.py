@@ -9,15 +9,23 @@ new_gcode = []
 parsed_gcode = GcodeParser(gcode, include_comments=True).lines
 for line in parsed_gcode:
     # заменить команды G2 и G3
-    if line.command == ('G', 2) or line.command == ('G', 3):
-        print(f'Найдена команда {line.params["X"], line.params["Y"], line.params["I"], line.params["J"]} в позиции {(prev_x, prev_y)}')
-        arc_lines = (GCode.arc_to_lines((prev_x, prev_y), (line.params["X"], line.params["Y"]), line.params["I"], line.params["J"], clockwise=True, num_segments=20))
-        for l in arc_lines:
-            new_line = ('G1 X{} Y{}'.format(l[0], l[1]))
-            new_gcode.append(new_line)
-    else:
+    if not line.command_str in ("G2", "G3"):
         new_gcode.append(line.gcode_str)
+    else:  
+        if line.command == ('G', 2):
+            print(f'Найдена команда G3 {line.params["X"], line.params["Y"], line.params["I"], line.params["J"]} в позиции {(prev_x, prev_y)}')
+            clockwise = False
+        else:
+            print(f'Найдена команда G3 {line.params["X"], line.params["Y"], line.params["I"], line.params["J"]} в позиции {(prev_x, prev_y)}')
+            clockwise = True
 
+        arc_lines = (GCode.arc_to_lines((prev_x, prev_y), (line.params["X"], line.params["Y"]),
+                                            line.params["I"],
+                                            line.params["J"], 
+                                            clockwise,
+                                            num_segments=20
+                                            ))
+        
     if 'X' in line.params:
         prev_x = line.params['X']
     if 'Y' in line.params:
