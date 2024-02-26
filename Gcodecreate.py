@@ -43,28 +43,6 @@ class GCode:
             lines.append((float(f"{x:.4f}"), float(f"{y:.4f}")))
         
         return lines
-    
-    @staticmethod
-    def load_from_file( file_path):
-        with open(file_path, 'r') as file:
-            return file.readlines()
-
-    @staticmethod
-    def save_to_file(file_path, commands):
-        with open(file_path, 'w') as file:
-            file.writelines(commands)
-
-    @staticmethod
-    def add_command(commands, command):
-        commands.append(command + '\n')
-
-    @staticmethod
-    def remove_command(commands, index):
-        del commands[index]
-
-    @staticmethod
-    def clear_commands(commands):
-        commands.clear()
 
     @staticmethod
     def find_x(x1, y1, x2, y2, y):
