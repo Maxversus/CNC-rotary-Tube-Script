@@ -32,6 +32,8 @@ class GCode:
         # Определяем угловой шаг между сегментами
         if end_angle - start_angle != 0:
             angle_step = (end_angle - start_angle) / num_segments
+        elif clockwise:
+            angle_step = -2 * math.pi / num_segments
         else:
             angle_step = 2 * math.pi / num_segments
 
