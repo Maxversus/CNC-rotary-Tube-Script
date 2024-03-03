@@ -10,6 +10,7 @@ divisor = (D*3.1415926535)/360
 # открыть файл gcode и сохранить содержимое в переменной
 with open(filename, 'r') as f:
     gcode = f.read()
+print(gcode)
 new_gcode = []
 # получить разобранные строки gcode
 parsed_gcode = GcodeParser(gcode, include_comments=True).lines
@@ -39,9 +40,9 @@ for line in parsed_gcode:
     if 'Y' in line.params:
         prev_y = line.params['Y']
 
+content = GCode.replace_y_values(new_gcode, divisor)
 
-content = replace_y_values(str(new_gcode), divisor)
 
-print(content)
-with open(f"{filename}_mod", "w") as file:
-    file.write(content)
+with open(f'Mod{filename}', 'w') as file:
+    for line in content:
+     file.write(str(line) + '\n')

@@ -4,14 +4,20 @@ from gcodeparser import GcodeParser
 class GCode:
     
     @staticmethod
-    def replace_y_values(code, divisor):
-    
+    def replace_y_values(code_lines, divisor):
+    # Функция replacer заменяет каждое совпадение с шаблоном на новое значение, деленное на divisor
         def replacer(match):
-            original_value = float(match.group()[1:])
-            new_value = '{:.2f}'.format(original_value / divisor)
-            return f'A{new_value}'
+            original_value = float(match.group()[1:])  # Извлекаем исходное значение из совпадения
+            new_value = '{:.2f}'.format(original_value / divisor)  # Вычисляем новое значение
+            return f'A{new_value}'  # Возвращаем новое значение с добавлением префикса 'A'
 
-        return re.sub(r'Y-?\d+\.\d+', replacer, code)
+        # Используем регулярное выражение для поиска и замены всех значений Y в каждой строке кода
+        new_code_lines = []
+        for line in code_lines:
+            new_line = re.sub(r'Y-?\d+\.\d+', replacer, line)
+            new_code_lines.append(new_line)
+        
+        return new_code_lines
 
     @staticmethod
     def arc_to_lines(start_point, end_point, I = 0, J = 0, clockwise=True, num_segments=20):
