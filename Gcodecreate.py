@@ -42,7 +42,7 @@ class GCode:
             angle = start_angle + angle_step * i
             x = center[0] + radius * math.cos(angle)
             y = center[1] + radius * math.sin(angle)
-            lines.append((float(f"{x:.4f}"), float(f"{y:.4f}")))
+            lines.append(f"G1 X{float(x):.4f} Y{float(y):.4f}")
         
         return lines
 
