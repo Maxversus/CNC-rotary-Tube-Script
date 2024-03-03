@@ -39,14 +39,6 @@ for line in parsed_gcode:
     if 'Y' in line.params:
         prev_y = line.params['Y']
 
-def replace_y_values(code, divisor):
-    
-    def replacer(match):
-        original_value = float(match.group()[1:])
-        new_value = '{:.2f}'.format(original_value / divisor)
-        return f'A{new_value}'
-
-    return re.sub(r'Y-?\d+\.\d+', replacer, code)
 
 content = replace_y_values(str(new_gcode), divisor)
 

@@ -3,16 +3,17 @@ import math
 from gcodeparser import GcodeParser
 class GCode:
     
-    def arc_find(gcode):
-        arc = []
-        gcode = GcodeParser(gcode)
-        
-        
-        # arc.append(start_point, end_point, center, clockwise=True)
-        return arc
+    @staticmethod
+    def replace_y_values(code, divisor):
+    
+        def replacer(match):
+            original_value = float(match.group()[1:])
+            new_value = '{:.2f}'.format(original_value / divisor)
+            return f'A{new_value}'
+
+        return re.sub(r'Y-?\d+\.\d+', replacer, code)
 
     @staticmethod
-  
     def arc_to_lines(start_point, end_point, I = 0, J = 0, clockwise=True, num_segments=20):
         """Преобразует дугу в линейные интерполяции"""
         lines = []
