@@ -2,7 +2,7 @@ import re
 import math
 from gcodeparser import GcodeParser
 class GCode:
-    
+    sdf
     @staticmethod
     def replace_y_values(code_lines, divisor):
     # Функция replacer заменяет каждое совпадение с шаблоном на новое значение, деленное на divisor
