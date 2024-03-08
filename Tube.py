@@ -1,4 +1,3 @@
-import re
 from gcodeparser import GcodeParser
 from Gcodecreate import GCode
 D = 40 # Pipe diameter
